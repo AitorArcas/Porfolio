@@ -1,0 +1,70 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('proyectos');
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<'proyectos'>;
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+
+const formattedDate = project.data.date.toLocaleDateString('es-ES', {
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<Layout title={project.data.title} description={project.data.description}>
+  <article class="mx-auto max-w-prose px-6 py-20 sm:py-28">
+    <a href="/proyectos" class="text-sm text-muted transition-colors hover:text-accent">
+      ← Volver a proyectos
+    </a>
+
+    <p class="mt-6 text-sm text-muted">{formattedDate}</p>
+    <h1 class="mt-2 text-3xl sm:text-4xl">{project.data.title}</h1>
+
+    <ul class="mt-4 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted">
+      {project.data.tags.map((tag) => (
+        <li>{tag}</li>
+      ))}
+    </ul>
+
+    {(project.data.repoUrl || project.data.demoUrl) && (
+      <div class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+        {project.data.repoUrl && (
+          <a
+            href={project.data.repoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-accent underline underline-offset-4 transition-colors hover:text-accent-strong"
+          >
+            Ver repositorio
+          </a>
+        )}
+        {project.data.demoUrl && (
+          <a
+            href={project.data.demoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-accent underline underline-offset-4 transition-colors hover:text-accent-strong"
+          >
+            Ver demo
+          </a>
+        )}
+      </div>
+    )}
+
+    <div class="prose-content mt-10">
+      <Content />
+    </div>
+  </article>
+</Layout>

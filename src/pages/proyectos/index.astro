@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProjectListItem from '../../components/ProjectListItem.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('proyectos')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Layout title="Proyectos">
+  <main class="mx-auto max-w-content px-6 py-20 sm:py-28">
+    <h1 class="text-3xl">Proyectos</h1>
+    <p class="mt-3 max-w-prose text-muted">
+      Todo lo que he ido construyendo, ordenado de más reciente a más antiguo.
+    </p>
+
+    <div class="mt-10 flex flex-col divide-y divide-border border-y border-border">
+      {projects.map((project) => (
+        <ProjectListItem project={project} />
+      ))}
+    </div>
+  </main>
+</Layout>

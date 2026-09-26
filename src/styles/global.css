@@ -1,0 +1,152 @@
+/* ==========================================================================
+   FUENTES
+   Autoalojadas vía @fontsource: nada de peticiones externas a Google Fonts,
+   así el sitio funciona igual de rápido offline que en producción.
+   - Space Grotesk: titulares. Geométrica, algo técnica, con carácter propio
+     sin caer en la típica monoespaciada de "portfolio de programador".
+   - IBM Plex Sans: cuerpo de texto. Muy legible en pantalla, con un origen
+     técnico (IBM) que casa con el perfil sin ser la Inter/Roboto de siempre.
+   ========================================================================== */
+@import '@fontsource/space-grotesk/500.css';
+@import '@fontsource/space-grotesk/600.css';
+@import '@fontsource/space-grotesk/700.css';
+@import '@fontsource/ibm-plex-sans/400.css';
+@import '@fontsource/ibm-plex-sans/500.css';
+
+@import 'tailwindcss';
+
+/* ==========================================================================
+   DESIGN TOKENS (Tailwind v4, "CSS-first")
+   Única fuente de verdad para color, tipografía y espaciado. Cada variable
+   definida aquí genera automáticamente sus utilidades de Tailwind
+   (--color-accent → bg-accent, text-accent, border-accent...), así que
+   cambiar un valor aquí actualiza todo el sitio, tanto el CSS a medida
+   como las clases de utilidad.
+   ========================================================================== */
+@theme {
+  /* Color — negro puro de fondo, azul eléctrico como único acento.
+     Un solo color vivo, usado con moderación (enlaces, foco, detalles). */
+  --color-bg: #000000;
+  --color-surface: #111111;      /* tarjetas y bloques elevados sobre el fondo */
+  --color-border: #232323;       /* líneas divisorias sutiles */
+  --color-text: #EAEAEA;         /* texto principal, blanco roto (no #FFF puro) */
+  --color-muted: #8C8C8C;        /* texto secundario / metadatos */
+  --color-accent: #4D7FFF;       /* acento azul eléctrico */
+  --color-accent-strong: #7AA0FF; /* variante más clara, para hover/focus */
+
+  /* Tipografía */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'IBM Plex Sans', sans-serif;
+
+  /* Escala tipográfica modular (ratio ~1.25), fluida entre móvil y desktop */
+  --text-xs: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+  --text-sm: clamp(0.875rem, 0.84rem + 0.15vw, 0.9375rem);
+  --text-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --text-lg: clamp(1.125rem, 1.06rem + 0.3vw, 1.25rem);
+  --text-xl: clamp(1.375rem, 1.25rem + 0.6vw, 1.625rem);
+  --text-2xl: clamp(1.75rem, 1.55rem + 1vw, 2.25rem);
+  --text-3xl: clamp(2.25rem, 1.9rem + 1.6vw, 3rem);
+  --text-4xl: clamp(2.75rem, 2.2rem + 2.5vw, 4rem);
+  --text-5xl: clamp(3.25rem, 2.4rem + 4vw, 5.5rem);
+
+  /* Anchos de contenido reutilizables → generan max-w-prose / max-w-content */
+  --container-prose: 42rem;   /* ~ menos de 80 caracteres por línea */
+  --container-content: 72rem;
+}
+
+/* Respeta la preferencia del sistema de reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer base {
+  html {
+    background: var(--color-bg);
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    line-height: 1.15;
+    font-weight: 600;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  /* Foco de teclado visible en todo el sitio — accesibilidad no negociable */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+}
+
+/* ==========================================================================
+   ANIMACIÓN DE SCROLL REUTILIZABLE
+   Añade class="reveal" a cualquier elemento (aquí, o en futuras secciones)
+   para que aparezca con un fade + desplazamiento al entrar en el viewport.
+   El JS que activa "is-visible" vive en Layout.astro, así que funciona en
+   cualquier página sin configuración extra.
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   CONTENIDO DE MARKDOWN (páginas de detalle de proyecto)
+   Estilos mínimos a mano en vez de añadir el plugin @tailwindcss/typography
+   — con solo h2/h3/p/ul/a nos sobra, y así no sumamos otra dependencia.
+   ========================================================================== */
+@layer components {
+  .prose-content h2 {
+    margin-top: 2.5rem;
+    font-size: var(--text-2xl);
+  }
+  .prose-content h3 {
+    margin-top: 2rem;
+    font-size: var(--text-xl);
+  }
+  .prose-content p {
+    margin-top: 1rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+  }
+  .prose-content ul {
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+    list-style: disc;
+    color: var(--color-muted);
+  }
+  .prose-content li + li {
+    margin-top: 0.5rem;
+  }
+  .prose-content a {
+    color: var(--color-accent);
+    text-underline-offset: 4px;
+    text-decoration: underline;
+  }
+  .prose-content a:hover {
+    color: var(--color-accent-strong);
+  }
+}
