@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import ProjectListItem from '../components/ProjectListItem.astro';
 import { getCollection } from 'astro:content';
 
-const focusAreas = ['Frontend', 'Backend', 'Programación asistida por IA'];
+const focusAreas = ['Soporte y sistemas', 'Desarrollo de software', 'IA aplicada'];
 
 const allProjects = (await getCollection('proyectos')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
@@ -15,16 +15,17 @@ const hasMoreProjects = allProjects.length > featuredProjects.length;
 <Layout title="Inicio">
   <section class="mx-auto flex min-h-full max-w-content flex-col px-6 py-10">
     <div class="flex flex-1 flex-col justify-center">
-      <p class="text-sm text-muted">Aitor Arcas — Desarrollo de software</p>
+      <p class="text-sm text-muted">Aitor Arcas — Sistemas y desarrollo de software</p>
       <h1 class="mt-4 text-3xl sm:text-4xl">
         Construyo software combinando fundamentos sólidos con herramientas de IA modernas.
       </h1>
       <p class="mt-6 max-w-prose text-lg text-muted">
-        Estoy formándome como desarrollador full stack. Uso Claude Code y otras
-        herramientas de IA como parte real de mi forma de trabajar, no como un
-        añadido de moda: me ayudan a pensar mejor cómo construir las cosas, no
-        solo a escribirlas más rápido. Este mismo portfolio es un buen ejemplo:
-        lo he diseñado y construido paso a paso, en conversación con IA.
+        Vengo del soporte técnico y los sistemas — más de 8 años reparando,
+        montando y optimizando equipos — y ahora estoy ampliando ese perfil
+        hacia el desarrollo de software. Uso Claude Code, OpenCode y modelos
+        en local (Ollama, LM Studio) como parte real de mi flujo de trabajo:
+        los dirijo y reviso, no les delego todo. Este mismo portfolio es un
+        buen ejemplo de ese proceso.
       </p>
       <div class="mt-8 flex flex-wrap gap-4">
         <a

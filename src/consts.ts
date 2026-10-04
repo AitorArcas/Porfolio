@@ -4,13 +4,11 @@
 
 export const SITE = {
   name: 'Aitor Arcas',
-  role: 'Desarrollador en formación (DAM)',
   description:
-    'Portfolio de Aitor Arcas — estudiante de DAM, desarrollo full stack y programación asistida por IA.',
-  // TODO Aitor: sustituye por tus URLs reales cuando las tengas a mano
-  github: 'https://github.com/tu-usuario',
-  linkedin: 'https://linkedin.com/in/tu-usuario',
-  email: 'tucorreo@ejemplo.com',
+    'Portfolio de Aitor Arcas — técnico de sistemas y desarrollador en formación, con IA aplicada al desarrollo.',
+  github: 'https://github.com/AitorArcas',
+  linkedin: 'https://www.linkedin.com/in/aitorarcas/',
+  email: 'aitorarcasaitorarcas@hotmail.com',
 } as const;
 
 export const NAV_LINKS = [

@@ -1,10 +1,95 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const timeline = [
+  {
+    period: '2024 — Actualidad',
+    title: 'Desarrollo de Aplicaciones Multiplataforma (DAM)',
+    place: 'IES El Cañaveral',
+  },
+  {
+    period: 'Completado',
+    title: 'Sistemas Microinformáticos y Redes (SMR)',
+    place: 'IES Cañada Real',
+  },
+];
+
+const skills = [
+  {
+    label: 'Sistemas y soporte',
+    items: ['Windows', 'Hardware', 'Redes', 'Docker / Docker Compose', 'Vagrant'],
+  },
+  {
+    label: 'Desarrollo',
+    items: ['Java', 'C#', 'HTML', 'WordPress', 'Astro'],
+  },
+  {
+    label: 'IA aplicada',
+    items: ['Claude Code', 'OpenCode', 'Windsurf', 'Ollama', 'LM Studio', 'MCP'],
+  },
+];
 ---
 
 <Layout title="Sobre mí">
-  <main class="mx-auto max-w-content px-6 py-24 text-center">
-    <p class="text-sm text-muted">Próximamente — Paso 7 del plan</p>
-    <h1 class="mt-2 text-3xl">Sobre mí</h1>
+  <main class="mx-auto max-w-content px-6 py-20 sm:py-28">
+    <header class="max-w-prose">
+      <h1 class="text-3xl sm:text-4xl">Sobre mí</h1>
+      <p class="mt-4 text-lg text-muted">
+        Llevo más de 8 años trabajando en soporte técnico y sistemas —
+        diagnóstico y reparación de hardware, Windows, redes, optimización de
+        rendimiento — y ahora estoy ampliando ese perfil hacia el desarrollo
+        de software, formándome en Java y C#, con WordPress y HTML en
+        proyectos reales.
+      </p>
+      <p class="mt-4 text-lg text-muted">
+        Trabajo a diario con IA aplicada al desarrollo: uso OpenCode y
+        Windsurf, ejecuto modelos en local con Ollama y LM Studio, y conozco
+        cómo funcionan los LLM por dentro (tokens, contexto, skills,
+        agentes), además del uso de MCPs para conectar modelos con
+        herramientas reales y automatizaciones. Mi enfoque es dirigir y
+        revisar lo que genera la IA, no delegarlo todo en ella.
+      </p>
+    </header>
+
+    <section class="mt-16 border-t border-border pt-10">
+      <h2 class="text-xl">Formación</h2>
+      <div class="mt-6 space-y-8">
+        {timeline.map((entry) => (
+          <div>
+            <p class="text-sm text-muted">{entry.period}</p>
+            <h3 class="mt-1 text-lg">{entry.title}</h3>
+            <p class="mt-1 text-muted">{entry.place}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-16 border-t border-border pt-10">
+      <h2 class="text-xl">Con qué trabajo</h2>
+      <div class="mt-6 grid gap-10 sm:grid-cols-3">
+        {skills.map((group) => (
+          <div>
+            <h3 class="text-sm text-muted">{group.label}</h3>
+            <ul class="mt-3 space-y-2">
+              {group.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-16 border-t border-border pt-10 pb-4">
+      <p class="text-muted">
+        ¿Quieres hablar?
+        <a
+          href="/contacto"
+          class="text-accent underline underline-offset-4 transition-colors hover:text-accent-strong"
+        >
+          Escríbeme
+        </a>.
+      </p>
+    </section>
   </main>
 </Layout>
