@@ -1,6 +1,7 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { withBase } from '../../utils/url';
 
 export async function getStaticPaths() {
   const projects = await getCollection('proyectos');
@@ -25,7 +26,7 @@ const formattedDate = project.data.date.toLocaleDateString('es-ES', {
 
 <Layout title={project.data.title} description={project.data.description}>
   <article class="mx-auto max-w-prose px-6 py-20 sm:py-28">
-    <a href="/proyectos" class="text-sm text-muted transition-colors hover:text-accent">
+    <a href={withBase('/proyectos')} class="text-sm text-muted transition-colors hover:text-accent">
       ← Volver a proyectos
     </a>
 

@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import ProjectListItem from '../components/ProjectListItem.astro';
 import { getCollection } from 'astro:content';
+import { withBase } from '../utils/url';
 
 const focusAreas = ['Soporte y sistemas', 'Desarrollo de software', 'IA aplicada'];
 
@@ -29,13 +30,13 @@ const hasMoreProjects = allProjects.length > featuredProjects.length;
       </p>
       <div class="mt-8 flex flex-wrap gap-4">
         <a
-          href="/proyectos"
+          href={withBase('/proyectos')}
           class="rounded bg-accent px-5 py-2.5 text-sm font-medium text-black transition-colors hover:bg-accent-strong"
         >
           Ver proyectos
         </a>
         <a
-          href="/contacto"
+          href={withBase('/contacto')}
           class="rounded border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
         >
           Hablemos
@@ -60,7 +61,7 @@ const hasMoreProjects = allProjects.length > featuredProjects.length;
       <h2 class="text-2xl">Proyectos</h2>
       {hasMoreProjects && (
         <a
-          href="/proyectos"
+          href={withBase('/proyectos')}
           class="text-sm text-muted transition-colors hover:text-accent"
         >
           Ver todos los proyectos

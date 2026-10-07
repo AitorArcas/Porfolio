@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { withBase } from '../utils/url';
 
 const timeline = [
   {
@@ -84,7 +85,7 @@ const skills = [
       <p class="text-muted">
         ¿Quieres hablar?
         <a
-          href="/contacto"
+          href={withBase('/contacto')}
           class="text-accent underline underline-offset-4 transition-colors hover:text-accent-strong"
         >
           Escríbeme
