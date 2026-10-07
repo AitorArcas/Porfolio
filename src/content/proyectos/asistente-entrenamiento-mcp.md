@@ -3,6 +3,7 @@ title: "Asistente de entrenamiento con MCP y LM Studio Bionic"
 description: "Conecté el servidor MCP de Intervals.icu a LM Studio Bionic para poder preguntarle en lenguaje natural a un modelo local por mi carga de entrenamiento y mis datos de ciclismo reales."
 date: 2026-10-07
 tags: ["MCP", "LM Studio Bionic", "Python", "IA aplicada"]
+repoUrl: "https://github.com/mvilanova/intervals-mcp-server"
 ---
 
 ## El problema
